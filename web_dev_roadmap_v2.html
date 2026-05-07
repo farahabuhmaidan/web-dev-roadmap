@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Developer Roadmap — Development to Deployment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #0e0f11;
+  --bg2:        #141519;
+  --bg3:        #1c1e24;
+  --line:       #2a2d36;
+  --line2:      #353844;
+  --txt:        #e8e9ec;
+  --txt2:       #9a9db0;
+  --txt3:       #5c5f72;
+  --accent:     #f0f0f0;
+  --c-core:     #4a9eff;
+  --c-tool:     #52d58a;
+  --c-concept:  #b48eff;
+  --c-infra:    #ffa94d;
+  --c-ops:      #ff7b72;
+
+  --tag-core-bg:    rgba(74,158,255,.1);
+  --tag-tool-bg:    rgba(82,213,138,.1);
+  --tag-concept-bg: rgba(180,142,255,.1);
+  --tag-infra-bg:   rgba(255,169,77,.1);
+  --tag-ops-bg:     rgba(255,123,114,.1);
+
+  --radius: 10px;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Instrument Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Grid background ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: .35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 32px 100px;
+}
+
+/* ── Hero ── */
+.hero {
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--line2);
+  margin-bottom: 56px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--txt3);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 62px);
+  font-weight: 800;
+  line-height: 1.07;
+  letter-spacing: -.02em;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+h1 span { color: var(--txt3); }
+
+.hero-sub {
+  color: var(--txt2);
+  font-size: 16px;
+  max-width: 540px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* ── Legend ── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.legend-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--line2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt2);
+  background: var(--bg2);
+}
+.legend-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Stats row ── */
+.stats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 56px;
+  padding: 24px 32px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-lbl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* ── Phase block ── */
+.phase { margin-bottom: 16px; }
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  user-select: none;
+  transition: border-color .2s, background .2s;
+}
+.phase-header:hover { border-color: var(--line2); background: var(--bg3); }
+.phase.open .phase-header {
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom-color: transparent;
+  background: var(--bg3);
+}
+
+.phase-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--txt3);
+  flex-shrink: 0;
+  width: 28px;
+}
+.phase-stripe {
+  width: 3px;
+  height: 22px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.phase-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent);
+  flex: 1;
+}
+.phase-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  flex-shrink: 0;
+}
+.phase-chevron {
+  width: 18px; height: 18px;
+  flex-shrink: 0;
+  color: var(--txt3);
+  transition: transform .25s;
+}
+.phase.open .phase-chevron { transform: rotate(90deg); }
+
+/* ── Phase body ── */
+.phase-body {
+  display: none;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
+}
+.phase.open .phase-body { display: block; }
+
+/* ── Topic row ── */
+.topic {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  align-items: start;
+  transition: background .15s;
+}
+.topic:last-child { border-bottom: none; }
+.topic:hover { background: var(--bg3); }
+
+.tag {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-align: center;
+  margin-top: 2px;
+}
+.tag-Core    { background: var(--tag-core-bg);    color: var(--c-core);    border: 1px solid rgba(74,158,255,.2); }
+.tag-Tool    { background: var(--tag-tool-bg);    color: var(--c-tool);    border: 1px solid rgba(82,213,138,.2); }
+.tag-Concept { background: var(--tag-concept-bg); color: var(--c-concept); border: 1px solid rgba(180,142,255,.2); }
+.tag-Infra   { background: var(--tag-infra-bg);   color: var(--c-infra);   border: 1px solid rgba(255,169,77,.2); }
+.tag-Ops     { background: var(--tag-ops-bg);     color: var(--c-ops);     border: 1px solid rgba(255,123,114,.2); }
+
+.topic-content { min-width: 0; }
+
+.topic-title {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.topic-desc {
+  font-size: 13px;
+  color: var(--txt2);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
+.topic-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px 3px 8px;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--line2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt2);
+  text-decoration: none;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.link:hover {
+  border-color: var(--c-core);
+  color: var(--c-core);
+  background: rgba(74,158,255,.05);
+}
+.link svg {
+  width: 10px; height: 10px;
+  flex-shrink: 0;
+  opacity: .5;
+}
+
+/* ── Footer ── */
+.footer {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── Duration badge ── */
+.phase-duration {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--txt3);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 8px;
+  flex-shrink: 0;
+  letter-spacing: .04em;
+}
+
+/* ── Schedule button ── */
+.btn-schedule {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(74,158,255,.08);
+  border: 1px solid rgba(74,158,255,.28);
+  border-radius: var(--radius);
+  color: #4a9eff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .05em;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .15s;
+  white-space: nowrap;
+  margin-top: 16px;
+}
+.btn-schedule:hover {
+  background: rgba(74,158,255,.16);
+  border-color: rgba(74,158,255,.5);
+  transform: translateY(-1px);
+}
+.btn-schedule svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* ── Schedule sidebar ── */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 100;
+}
+.sidebar-backdrop.open { display: block; }
+body.sidebar-open { overflow: hidden; }
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 440px;
+  max-width: 100vw;
+  background: var(--bg2);
+  border-left: 1px solid var(--line2);
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 28px 28px 22px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.sidebar-body {
+  padding: 20px 28px 40px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: none;
+  border: 1px solid var(--line2);
+  border-radius: 6px;
+  color: var(--txt3);
+  cursor: pointer;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: color .15s, border-color .15s;
+}
+.sidebar-close:hover { color: var(--txt); border-color: var(--txt3); }
+
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 20px;
+  padding-right: 40px;
+}
+
+.modal-date-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.modal-date-row label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--txt2);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.modal-date-row input[type="date"] {
+  background: var(--bg3);
+  border: 1px solid var(--line2);
+  border-radius: 6px;
+  color: var(--txt);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 8px 12px;
+  cursor: pointer;
+  color-scheme: dark;
+}
+.modal-date-row input[type="date"]:focus {
+  outline: none;
+  border-color: #4a9eff;
+}
+
+/* ── Phase schedule list ── */
+.sched-list { display: flex; flex-direction: column; gap: 8px; }
+
+.sched-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: border-color .15s;
+}
+.sched-item:hover { border-color: var(--line2); }
+
+.sched-stripe {
+  width: 3px;
+  height: 32px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.sched-info { flex: 1; min-width: 0; }
+.sched-name {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sched-dates {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  margin-top: 2px;
+}
+.sched-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: none;
+  border: 1px solid var(--line2);
+  border-radius: 6px;
+  color: var(--txt2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .04em;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, border-color .15s, color .15s;
+  flex-shrink: 0;
+}
+.sched-add:hover {
+  background: rgba(74,158,255,.1);
+  border-color: rgba(74,158,255,.4);
+  color: #4a9eff;
+}
+.sched-add svg { width: 11px; height: 11px; }
+
+.btn-export-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: rgba(82,213,138,.08);
+  border: 1px solid rgba(82,213,138,.3);
+  border-radius: 8px;
+  color: #52d58a;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-export-all:hover {
+  background: rgba(82,213,138,.16);
+  border-color: rgba(82,213,138,.55);
+  transform: translateY(-1px);
+}
+.btn-export-all svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ── Cadence picker ── */
+.cadence-section {
+  margin-bottom: 20px;
+}
+.cadence-section > label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--txt2);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.cadence-pills {
+  display: flex;
+  gap: 6px;
+}
+.cadence-pill {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--line2);
+  background: var(--bg3);
+  color: var(--txt2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.cadence-pill:hover {
+  border-color: var(--c-core);
+  color: var(--c-core);
+  background: rgba(74,158,255,.06);
+}
+.cadence-pill.active {
+  background: rgba(74,158,255,.15);
+  border-color: rgba(74,158,255,.5);
+  color: #4a9eff;
+}
+.cadence-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  margin-top: 8px;
+}
+.sched-dates-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--txt3);
+  margin-top: 1px;
+}
+
+/* ── Print ── */
+@media print {
+  body { background: #fff; color: #111; }
+  body::before { display: none; }
+  .phase-header, .phase-body { border-color: #ddd; background: #fff; }
+  .phase-body { display: block !important; }
+  .phase-chevron { display: none; }
+  .link { color: #2563eb; border: none; background: none; padding: 0; }
+  .link svg { display: none; }
+  .link::after { content: " (" attr(href) ")"; font-size: 9px; color: #666; }
+  h1 { color: #111; }
+  .hero-sub, .topic-desc { color: #444; }
+  .stat-num { color: #111; }
+  .stats { border: 1px solid #ddd; }
+  :root { --txt3: #888; --txt2: #555; }
+}
+
+@media (max-width: 600px) {
+  .wrap { padding: 36px 20px 80px; }
+  .topic { grid-template-columns: 74px 1fr; gap: 12px; }
+  .stats { gap: 24px; padding: 20px; flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-eyebrow">Reference Guide</div>
+    <h1>Web Dev<br><span>Roadmap</span></h1>
+    <p class="hero-sub">Everything from your first JavaScript runtime to deploying containers in production. Phases are in dependency order — phases 6–12 can be explored in parallel once you are solid on 1–5.</p>
+    <div class="legend">
+      <div class="legend-pill"><div class="legend-dot" style="background:var(--c-core)"></div>Core — language / API</div>
+      <div class="legend-pill"><div class="legend-dot" style="background:var(--c-tool)"></div>Tool — tooling</div>
+      <div class="legend-pill"><div class="legend-dot" style="background:var(--c-concept)"></div>Concept — mental model</div>
+      <div class="legend-pill"><div class="legend-dot" style="background:var(--c-infra)"></div>Infra — infrastructure</div>
+      <div class="legend-pill"><div class="legend-dot" style="background:var(--c-ops)"></div>Ops — DevOps / CI/CD</div>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div><div class="stat-num">12</div><div class="stat-lbl">Phases</div></div>
+    <div><div class="stat-num">94</div><div class="stat-lbl">Topics</div></div>
+    <div><div class="stat-num">140+</div><div class="stat-lbl">Learning links</div></div>
+    <div><div class="stat-num">~23</div><div class="stat-lbl">Weeks total</div></div>
+    <button class="btn-schedule" onclick="openModal()">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="14" height="14" rx="2"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+      Create Schedule
+    </button>
+  </div>
+
+  <!-- Phases -->
+  <div id="phases"></div>
+
+  <footer class="footer">
+    <span>Web Developer Roadmap · 12 phases · 94 topics</span>
+    <span>Links open official docs &amp; trusted learning resources</span>
+  </footer>
+</div>
+
+<!-- Schedule Sidebar -->
+<div class="sidebar-backdrop" id="schedBackdrop" onclick="closeModal()"></div>
+<div class="sidebar" id="schedSidebar">
+  <div class="sidebar-header">
+    <button class="sidebar-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <div class="sidebar-title">Create Your Schedule</div>
+
+    <div class="modal-date-row">
+      <label>Start date</label>
+      <input type="date" id="schedStart" onchange="renderSchedule()" />
+    </div>
+
+    <div class="cadence-section">
+      <label>Days per week</label>
+      <div class="cadence-pills" id="cadencePills">
+        <button class="cadence-pill" onclick="setCadence(1)">1</button>
+        <button class="cadence-pill" onclick="setCadence(2)">2</button>
+        <button class="cadence-pill" onclick="setCadence(3)">3</button>
+        <button class="cadence-pill" onclick="setCadence(4)">4</button>
+        <button class="cadence-pill active" onclick="setCadence(5)">5</button>
+        <button class="cadence-pill" onclick="setCadence(6)">6</button>
+        <button class="cadence-pill" onclick="setCadence(7)">7</button>
+      </div>
+      <div class="cadence-hint" id="cadenceHint">Weekdays — the default estimate</div>
+    </div>
+
+    <button class="btn-export-all" onclick="exportAllICS()">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v8M4 6l3 3 3-3M2 10v2a1 1 0 001 1h8a1 1 0 001-1v-2"/></svg>
+      Export all phases (.ics)
+    </button>
+  </div>
+
+  <div class="sidebar-body">
+    <div class="sched-list" id="schedList"></div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('schedSidebar').classList.add('open');
+  document.getElementById('schedBackdrop').classList.add('open');
+  document.body.classList.add('sidebar-open');
+}
+function closeModal() {
+  document.getElementById('schedSidebar').classList.remove('open');
+  document.getElementById('schedBackdrop').classList.remove('open');
+  document.body.classList.remove('sidebar-open');
+}
+
+const LINK = (label, url) => ({ label, url });
+
+const phaseWeeks = [1, 1, 1, 3, 4, 3, 1, 2, 1, 2, 2, 2];
+
+const phases = [
+  {
+    num: "01", color: "#4a9eff",
+    title: "The JavaScript Runtime",
+    topics: [
+      { tag:"Concept", title:"What is a JavaScript engine?",
+        desc:"V8 (Chrome/Node), SpiderMonkey (Firefox), and JavaScriptCore (Safari) are the interpreters that parse and execute JS. They compile to machine code via JIT for performance.",
+        links:[LINK("V8 internals","https://v8.dev/docs"),LINK("How JS engines work","https://blog.bitsrc.io/javascript-engines-how-do-they-even-work-from-call-stack-to-promise-you-should-know-it-all-d50f09c333f6")] },
+      { tag:"Concept", title:"The event loop, call stack, and task queue",
+        desc:"JS is single-threaded. The call stack runs synchronous code; the event loop moves async callbacks from the task queue onto the stack once it's clear.",
+        links:[LINK("MDN — event loop","https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop"),LINK("javascript.info","https://javascript.info/event-loop"),LINK("Node.js docs","https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick")] },
+      { tag:"Concept", title:"Microtasks vs. macrotasks",
+        desc:"Promise callbacks are microtasks and run before the next macrotask (setTimeout, I/O). Understanding the priority order prevents subtle async bugs.",
+        links:[LINK("MDN — microtask guide","https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide"),LINK("javascript.info","https://javascript.info/microtask-queue")] },
+      { tag:"Core", title:"Node.js — running JS outside the browser",
+        desc:"Node is a runtime built on V8 that adds file system access, networking, and OS APIs. It powers most backend JS and tooling you'll encounter.",
+        links:[LINK("Node.js official guide","https://nodejs.org/en/learn/getting-started/introduction-to-nodejs"),LINK("Node.js docs","https://nodejs.org/docs/latest/api/")] },
+      { tag:"Core", title:"Deno and Bun — alternative runtimes",
+        desc:"Deno is a secure TypeScript-first runtime by Node's creator. Bun is a fast all-in-one runtime (runtime + bundler + package manager) built in Zig.",
+        links:[LINK("Deno docs","https://docs.deno.com/runtime/"),LINK("Bun docs","https://bun.sh/docs")] },
+      { tag:"Concept", title:"CommonJS vs. ES Modules",
+        desc:"CJS (require/module.exports) is Node's original format; ESM (import/export) is the standard. Modern projects use ESM, but CJS is still everywhere.",
+        links:[LINK("Node.js ESM guide","https://nodejs.org/api/esm.html"),LINK("javascript.info — modules","https://javascript.info/modules-intro")] },
+      { tag:"Concept", title:"Browser runtime vs. Node.js",
+        desc:"The browser has the DOM, window, and browser APIs. Node has fs, http, process, and more. Neither has the other's APIs — same language, different host.",
+        links:[LINK("Node.js — differences","https://nodejs.org/en/learn/getting-started/differences-between-nodejs-and-the-browser")] },
+    ]
+  },
+  {
+    num: "02", color: "#52d58a",
+    title: "Package Managers & Dependencies",
+    topics: [
+      { tag:"Tool", title:"npm — the default package manager",
+        desc:"npm ships with Node.js and is the world's largest software registry. You use it to install, update, and remove packages and run project scripts.",
+        links:[LINK("npm docs","https://docs.npmjs.com/getting-started"),LINK("npm CLI reference","https://docs.npmjs.com/cli/v10/commands")] },
+      { tag:"Tool", title:"yarn and pnpm",
+        desc:"Yarn offers workspaces and deterministic installs. pnpm uses a content-addressable store so packages are never duplicated on disk — faster and leaner.",
+        links:[LINK("Yarn getting started","https://yarnpkg.com/getting-started"),LINK("pnpm motivation","https://pnpm.io/motivation")] },
+      { tag:"Core", title:"package.json — scripts, metadata, and version ranges",
+        desc:"The manifest of your project. Declares dependencies, scripts (build, test, dev), engine requirements, and export maps.",
+        links:[LINK("npm — package.json","https://docs.npmjs.com/cli/v10/configuring-npm/package-json")] },
+      { tag:"Core", title:"package-lock.json and lockfiles",
+        desc:"Lockfiles pin every dependency's exact version so installs are reproducible across machines. Always commit them to source control.",
+        links:[LINK("npm — lockfile","https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json"),LINK("Why lockfiles matter","https://dev.to/gajus/stop-using-package-lock-json-20np")] },
+      { tag:"Concept", title:"Semantic versioning (SemVer)",
+        desc:"major.minor.patch — breaking change, new feature, bug fix. The ^ and ~ range specifiers in package.json are based on SemVer.",
+        links:[LINK("semver.org spec","https://semver.org/"),LINK("npm — semver","https://docs.npmjs.com/about-semantic-versioning")] },
+      { tag:"Concept", title:"dependencies vs. devDependencies vs. peerDependencies",
+        desc:"Regular deps ship to production; devDeps are build/test-only. peerDeps declare a host package your library expects the consumer to provide.",
+        links:[LINK("npm — specifying deps","https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file")] },
+      { tag:"Concept", title:"node_modules — how the dependency tree works",
+        desc:"npm flattens the dependency tree into node_modules. Nested node_modules resolve version conflicts. This is why the folder can be enormous.",
+        links:[LINK("npm install docs","https://docs.npmjs.com/cli/v10/commands/npm-install"),LINK("How npm3 flattens","https://npm.github.io/how-npm-works-docs/npm3/how-npm3-works.html")] },
+      { tag:"Concept", title:"Security: auditing packages and supply chain risks",
+        desc:"npm audit scans your dependency tree for known CVEs. Supply chain attacks (malicious packages) are a growing risk — pin versions and audit regularly.",
+        links:[LINK("npm audit guide","https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities"),LINK("OpenSSF best practices","https://openssf.org/resources/guides/")] },
+    ]
+  },
+  {
+    num: "03", color: "#b48eff",
+    title: "Bundlers & Build Tools",
+    topics: [
+      { tag:"Concept", title:"Why bundlers exist",
+        desc:"Browsers couldn't import thousands of JS files efficiently. Bundlers concatenate, tree-shake, and transform your code into optimized files for the browser.",
+        links:[LINK("MDN — JS tooling","https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Client-side_tools/Package_management"),LINK("Why bundle?","https://web.dev/articles/commonjs-larger-bundles")] },
+      { tag:"Tool", title:"Webpack — config-heavy and powerful",
+        desc:"The industry standard for years. Extremely flexible via loaders and plugins. Steeper learning curve but handles any use case.",
+        links:[LINK("Webpack concepts","https://webpack.js.org/concepts/"),LINK("Webpack guides","https://webpack.js.org/guides/")] },
+      { tag:"Tool", title:"Vite — dev server + bundler, ESM-first",
+        desc:"Uses native ES modules in development (no bundling needed) for near-instant startup. Uses Rollup under the hood for production builds.",
+        links:[LINK("Vite guide","https://vite.dev/guide/"),LINK("Why Vite?","https://vite.dev/guide/why.html")] },
+      { tag:"Tool", title:"Rollup — library-oriented bundling",
+        desc:"Excels at building clean ES module libraries. Produces smaller output than Webpack for libraries because it was designed for that use case.",
+        links:[LINK("Rollup intro","https://rollupjs.org/introduction/"),LINK("Rollup docs","https://rollupjs.org/configuration-options/")] },
+      { tag:"Tool", title:"esbuild — Go-based, extremely fast",
+        desc:"Written in Go, 10–100× faster than JS-based bundlers. Used internally by Vite for pre-bundling dependencies. Good for build tooling pipelines.",
+        links:[LINK("esbuild docs","https://esbuild.github.io/"),LINK("esbuild getting started","https://esbuild.github.io/getting-started/")] },
+      { tag:"Concept", title:"Code splitting and lazy loading",
+        desc:"Split your bundle into chunks so users only download what a given page needs. React.lazy() and dynamic import() enable route-level splitting.",
+        links:[LINK("Webpack — code splitting","https://webpack.js.org/guides/code-splitting/"),LINK("MDN — dynamic import","https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import")] },
+      { tag:"Concept", title:"Tree shaking — removing dead code",
+        desc:"Bundlers statically analyze import/export graphs and eliminate code that is never used. Only works with ES modules (not CommonJS).",
+        links:[LINK("Webpack — tree shaking","https://webpack.js.org/guides/tree-shaking/"),LINK("MDN explanation","https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking")] },
+      { tag:"Concept", title:"Source maps — debugging minified code",
+        desc:"Source maps let browser DevTools map minified production code back to your original source, making debugging possible without shipping readable code.",
+        links:[LINK("web.dev — source maps","https://web.dev/articles/source-maps"),LINK("Chrome DevTools guide","https://developer.chrome.com/docs/devtools/javascript/source-maps")] },
+      { tag:"Tool", title:"Babel — transpiling modern JS",
+        desc:"Converts ES2020+ syntax and JSX to older JS for browser compatibility. Less needed today with evergreen browsers, but still required for some targets.",
+        links:[LINK("Babel docs","https://babeljs.io/docs/"),LINK("Babel setup","https://babeljs.io/setup")] },
+    ]
+  },
+  {
+    num: "04", color: "#4a9eff",
+    title: "JavaScript — Core Language",
+    topics: [
+      { tag:"Core", title:"ES6+ fundamentals",
+        desc:"let/const, arrow functions, destructuring, spread/rest, template literals, optional chaining, nullish coalescing. These are now table stakes.",
+        links:[LINK("javascript.info (full book)","https://javascript.info/"),LINK("MDN JS reference","https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference")] },
+      { tag:"Core", title:"Promises and async/await",
+        desc:"Promises represent future values. async/await is syntactic sugar over promises — it makes async code read like sync code without blocking the thread.",
+        links:[LINK("javascript.info — promises","https://javascript.info/promise-basics"),LINK("MDN — async/await","https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS/Promises")] },
+      { tag:"Core", title:"The Fetch API and HTTP communication",
+        desc:"fetch() is the browser-native way to make HTTP requests, returning a Promise. Understand request/response objects, JSON parsing, and error handling.",
+        links:[LINK("MDN — Using Fetch","https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"),LINK("javascript.info","https://javascript.info/fetch")] },
+      { tag:"Concept", title:"Closures, scope, and the prototype chain",
+        desc:"Closures let inner functions access outer scope. JS uses prototype-based inheritance — every object has a [[Prototype]] chain that resolves property lookups.",
+        links:[LINK("MDN — closures","https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"),LINK("javascript.info — closures","https://javascript.info/closure"),LINK("Prototype chain","https://javascript.info/prototype-inheritance")] },
+      { tag:"Concept", title:"Higher-order functions — map, filter, reduce",
+        desc:"Functions that take or return functions. Array.prototype.map/filter/reduce are the core functional patterns for transforming data without mutation.",
+        links:[LINK("javascript.info — array methods","https://javascript.info/array-methods"),LINK("MDN — Array methods","https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array")] },
+      { tag:"Core", title:"Error handling — try/catch and error boundaries",
+        desc:"Use try/catch for sync errors and .catch()/.then() for promises. In React, error boundaries catch render-phase errors and show fallback UI.",
+        links:[LINK("javascript.info — try/catch","https://javascript.info/try-catch"),LINK("React error boundaries","https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary")] },
+      { tag:"Core", title:"TypeScript — static typing",
+        desc:"TypeScript adds optional static types to JS, catching bugs at compile time. The types are erased at runtime — output is plain JS.",
+        links:[LINK("TS Handbook","https://www.typescriptlang.org/docs/handbook/intro.html"),LINK("TS in 5 minutes","https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html")] },
+      { tag:"Concept", title:"Generics, interfaces, and utility types",
+        desc:"Generics let you write reusable type-safe code. Utility types like Partial<T>, Pick<T,K>, and Record<K,V> are everyday tools in TypeScript codebases.",
+        links:[LINK("TS — generics","https://www.typescriptlang.org/docs/handbook/2/generics.html"),LINK("TS — utility types","https://www.typescriptlang.org/docs/handbook/utility-types.html")] },
+      { tag:"Core", title:"DOM manipulation and browser APIs",
+        desc:"querySelector, addEventListener, createElement, fetch, localStorage, Web Workers, IntersectionObserver — the browser platform is huge. Start with the DOM.",
+        links:[LINK("MDN — DOM intro","https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction"),LINK("javascript.info — DOM","https://javascript.info/dom-nodes")] },
+      { tag:"Concept", title:"Memory management and garbage collection",
+        desc:"JS uses mark-and-sweep GC. Understand how closures and event listeners can cause memory leaks, and how to detect them in Chrome DevTools.",
+        links:[LINK("MDN — memory management","https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management"),LINK("Chrome — fix memory","https://developer.chrome.com/docs/devtools/memory-problems")] },
+      { tag:"Tool", title:"ESLint and Prettier",
+        desc:"ESLint enforces code quality rules; Prettier enforces formatting. They do different jobs — use both. Integrate into your editor and CI.",
+        links:[LINK("ESLint getting started","https://eslint.org/docs/latest/use/getting-started"),LINK("Prettier docs","https://prettier.io/docs/en/install")] },
+      { tag:"Tool", title:"Testing — Jest, Vitest, and Testing Library",
+        desc:"Unit and integration tests give you confidence to refactor. Jest is the classic; Vitest is faster and ESM-native. Testing Library tests behavior, not internals.",
+        links:[LINK("Vitest guide","https://vitest.dev/guide/"),LINK("Testing Library","https://testing-library.com/docs/"),LINK("Jest docs","https://jestjs.io/docs/getting-started")] },
+    ]
+  },
+  {
+    num: "05", color: "#ff7b72",
+    title: "React & Frontend Frameworks",
+    topics: [
+      { tag:"Concept", title:"The virtual DOM and reconciliation",
+        desc:"React keeps a virtual copy of the DOM in memory. When state changes, it diffs the new vs. old virtual DOM (reconciliation) and applies minimal real DOM updates.",
+        links:[LINK("React — rendering","https://react.dev/learn/render-and-commit"),LINK("React reconciler deep dive","https://react.dev/learn/preserving-and-resetting-state")] },
+      { tag:"Core", title:"Components, props, and state",
+        desc:"Components are functions that return JSX. Props are immutable inputs from the parent; state is local mutable data managed with hooks.",
+        links:[LINK("React — first component","https://react.dev/learn/your-first-component"),LINK("React official tutorial","https://react.dev/learn")] },
+      { tag:"Core", title:"Hooks — useState, useEffect, useContext, useMemo",
+        desc:"Hooks let function components use state and lifecycle features. useEffect handles side effects; useMemo/useCallback prevent unnecessary re-renders.",
+        links:[LINK("React — hooks reference","https://react.dev/reference/react/hooks"),LINK("Hooks at a glance","https://react.dev/learn/state-a-components-memory")] },
+      { tag:"Concept", title:"Component lifecycle",
+        desc:"Mounting (insert into DOM), updating (re-render on state/prop change), unmounting (removed from DOM). useEffect covers all three phases.",
+        links:[LINK("React — lifecycle of effects","https://react.dev/learn/lifecycle-of-reactive-effects"),LINK("React — effect docs","https://react.dev/reference/react/useEffect")] },
+      { tag:"Concept", title:"Lifting state up and prop drilling",
+        desc:"Shared state lives in the closest common ancestor. Deep passing of props through many layers is prop drilling — solved by Context or a state manager.",
+        links:[LINK("React — sharing state","https://react.dev/learn/sharing-state-between-components")] },
+      { tag:"Core", title:"Context API and global state",
+        desc:"Context lets you broadcast data (theme, auth, locale) to any component without manual prop passing. Not a replacement for all state management.",
+        links:[LINK("React — Context","https://react.dev/learn/passing-data-deeply-with-context"),LINK("Context reference","https://react.dev/reference/react/createContext")] },
+      { tag:"Tool", title:"State managers — Redux Toolkit, Zustand, Jotai",
+        desc:"Redux Toolkit is the opinionated official Redux with less boilerplate. Zustand is a tiny bear-sized store. Jotai uses atomic state. Pick based on scale.",
+        links:[LINK("Redux Toolkit","https://redux-toolkit.js.org/introduction/getting-started"),LINK("Zustand","https://zustand-demo.pmnd.rs/"),LINK("Jotai","https://jotai.org/docs/introduction")] },
+      { tag:"Core", title:"React Router — client-side navigation",
+        desc:"Enables SPA navigation without full page reloads. React Router v6+ uses a declarative nested route structure and data loaders.",
+        links:[LINK("React Router v7","https://reactrouter.com/start/framework/routing"),LINK("Tutorial","https://reactrouter.com/tutorials/address-book")] },
+      { tag:"Concept", title:"CSR vs. SSR vs. SSG — rendering strategies",
+        desc:"CSR renders in the browser (fast interaction, slow first load). SSR renders on the server per request (good SEO). SSG generates HTML at build time (fastest).",
+        links:[LINK("Next.js — rendering","https://nextjs.org/docs/app/building-your-application/rendering"),LINK("web.dev — rendering patterns","https://web.dev/articles/rendering-on-the-web")] },
+      { tag:"Tool", title:"Next.js — full-stack React",
+        desc:"Next.js adds file-based routing, SSR/SSG/ISR, API routes, image optimization, and middleware to React. It's the standard for production React apps.",
+        links:[LINK("Next.js docs","https://nextjs.org/docs"),LINK("Next.js tutorial","https://nextjs.org/learn")] },
+      { tag:"Core", title:"Data fetching — React Query / TanStack Query",
+        desc:"React Query manages server state: caching, background refetching, loading/error states. It removes most useEffect-based fetching code.",
+        links:[LINK("TanStack Query","https://tanstack.com/query/latest/docs/framework/react/overview"),LINK("SWR by Vercel","https://swr.vercel.app/")] },
+      { tag:"Concept", title:"Vue, Svelte, Solid — alternative frameworks",
+        desc:"Vue has excellent DX and is huge in Asia/Europe. Svelte compiles away the framework at build time. Solid uses fine-grained reactivity without a virtual DOM.",
+        links:[LINK("Vue guide","https://vuejs.org/guide/introduction"),LINK("Svelte docs","https://svelte.dev/docs/svelte/overview"),LINK("SolidJS","https://docs.solidjs.com/")] },
+    ]
+  },
+  {
+    num: "06", color: "#52d58a",
+    title: "Backend & APIs",
+    topics: [
+      { tag:"Concept", title:"HTTP — the backbone of the web",
+        desc:"Methods (GET, POST, PUT, DELETE, PATCH), status codes (2xx, 3xx, 4xx, 5xx), headers, and the request/response lifecycle. Know this cold.",
+        links:[LINK("MDN — HTTP overview","https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"),LINK("HTTP guide (http.dev)","https://http.dev/")] },
+      { tag:"Core", title:"REST API design",
+        desc:"Resources as nouns (/users, /orders), HTTP verbs as actions, JSON bodies, status codes as responses. REST is a convention, not a spec.",
+        links:[LINK("RESTful API tutorial","https://restfulapi.net/"),LINK("MDN — REST glossary","https://developer.mozilla.org/en-US/docs/Glossary/REST")] },
+      { tag:"Core", title:"Express.js — routing, middleware, error handling",
+        desc:"The most popular Node.js web framework. Minimal and unopinionated — add only what you need. Understand the middleware chain and next().",
+        links:[LINK("Express.js guide","https://expressjs.com/en/starter/installing.html"),LINK("Express API ref","https://expressjs.com/en/4x/api.html")] },
+      { tag:"Tool", title:"Fastify and Hono — lightweight alternatives",
+        desc:"Fastify is schema-first and ~3× faster than Express. Hono is tiny, edge-native, and works in Cloudflare Workers, Deno, and Bun.",
+        links:[LINK("Fastify docs","https://fastify.dev/docs/latest/"),LINK("Hono docs","https://hono.dev/docs/")] },
+      { tag:"Core", title:"GraphQL — schema, resolvers, queries, mutations",
+        desc:"Query exactly the data you need in a single request. The schema is a contract between client and server. Apollo and Pothos are common server implementations.",
+        links:[LINK("GraphQL official tutorial","https://graphql.org/learn/"),LINK("Apollo Server","https://www.apollographql.com/docs/apollo-server")] },
+      { tag:"Concept", title:"Authentication — sessions, JWT, OAuth 2.0",
+        desc:"Sessions store state server-side (cookie holds an ID). JWTs are self-contained tokens. OAuth 2.0 delegates auth to a third party (Google, GitHub).",
+        links:[LINK("JWT intro","https://jwt.io/introduction"),LINK("OAuth 2.0 simplified","https://aaronparecki.com/oauth-2-simplified/"),LINK("MDN — cookies","https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies")] },
+      { tag:"Core", title:"Databases — SQL vs. NoSQL, ORMs",
+        desc:"SQL (Postgres, MySQL) for relational data with ACID guarantees. NoSQL (MongoDB, Redis) for flexibility or speed. Prisma/Drizzle abstract the query layer.",
+        links:[LINK("Prisma getting started","https://www.prisma.io/docs/getting-started"),LINK("Drizzle ORM","https://orm.drizzle.team/docs/overview"),LINK("SQLite tutorial","https://www.sqlitetutorial.net/")] },
+      { tag:"Concept", title:"Environment variables and config management",
+        desc:"Never hard-code secrets. Use .env files locally (never commit them), and your hosting platform's secret store in production. Validate env vars at startup.",
+        links:[LINK("Node.js — env vars","https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs"),LINK("dotenv docs","https://github.com/motdotla/dotenv#readme")] },
+      { tag:"Concept", title:"Caching — Redis, CDN, HTTP cache headers",
+        desc:"Cache-Control headers tell browsers and CDNs how long to cache responses. Redis caches expensive DB queries in memory. Caching is the #1 scaling lever.",
+        links:[LINK("MDN — HTTP caching","https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching"),LINK("Redis quickstart","https://redis.io/docs/latest/get-started/")] },
+      { tag:"Tool", title:"API testing — Postman, REST clients",
+        desc:"Test your APIs manually with Postman or VS Code REST Client. Automate API tests with Supertest (Express) or Playwright's API testing mode.",
+        links:[LINK("Postman learning center","https://learning.postman.com/docs/getting-started/overview/"),LINK("Supertest","https://github.com/ladjs/supertest#readme")] },
+    ]
+  },
+  {
+    num: "07", color: "#ffa94d",
+    title: "Version Control & Collaboration",
+    topics: [
+      { tag:"Tool", title:"Git fundamentals",
+        desc:"commit, branch, merge, rebase, cherry-pick, stash. Git is a directed acyclic graph of snapshots. Learn the model, not just the commands.",
+        links:[LINK("Pro Git book (free)","https://git-scm.com/book/en/v2"),LINK("Learn Git Branching (visual)","https://learngitbranching.js.org/")] },
+      { tag:"Concept", title:"Branching strategies",
+        desc:"Git Flow uses long-lived feature/develop/main branches. Trunk-based development merges small changes to main daily, relying on feature flags.",
+        links:[LINK("Atlassian — Git Flow","https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow"),LINK("Trunk-based dev","https://trunkbaseddevelopment.com/")] },
+      { tag:"Tool", title:"GitHub / GitLab — PRs and code review",
+        desc:"Pull requests are the collaboration unit of modern software. Learn to write good PR descriptions, review code constructively, and resolve conflicts.",
+        links:[LINK("GitHub — PRs docs","https://docs.github.com/en/pull-requests/collaborating-with-pull-requests"),LINK("GitLab — merge requests","https://docs.gitlab.com/ee/user/project/merge_requests/")] },
+      { tag:"Concept", title:"Conventional commits and semantic release",
+        desc:"A structured commit message format (feat:, fix:, chore:) that enables automated changelogs and version bumping via semantic-release.",
+        links:[LINK("Conventional Commits spec","https://www.conventionalcommits.org/en/v1.0.0/"),LINK("semantic-release","https://semantic-release.gitbook.io/semantic-release")] },
+      { tag:"Concept", title:"Monorepos — Turborepo and Nx",
+        desc:"A monorepo holds multiple packages/apps in one Git repo. Turborepo and Nx provide caching and task pipelines to keep builds fast at scale.",
+        links:[LINK("Turborepo docs","https://turborepo.com/docs"),LINK("Nx getting started","https://nx.dev/getting-started/intro")] },
+      { tag:"Tool", title:"Git hooks — pre-commit with Husky",
+        desc:"Git hooks run scripts at key moments (pre-commit, pre-push). Husky makes them easy to share in a project — run linting or tests before every commit.",
+        links:[LINK("Husky docs","https://typicode.github.io/husky/"),LINK("lint-staged","https://github.com/lint-staged/lint-staged#readme")] },
+      { tag:"Concept", title:".gitignore and secrets hygiene",
+        desc:"Never commit node_modules, .env, build artifacts, or IDE config. Use GitHub's .gitignore templates. Rotate any secret that was ever committed.",
+        links:[LINK("git-scm — gitignore","https://git-scm.com/docs/gitignore"),LINK("GitHub .gitignore templates","https://github.com/github/gitignore")] },
+    ]
+  },
+  {
+    num: "08", color: "#ff7b72",
+    title: "Docker & Containerization",
+    topics: [
+      { tag:"Concept", title:"Containers vs. virtual machines",
+        desc:"VMs virtualize hardware and run a full OS. Containers share the host kernel and are far lighter. Docker makes containers easy to build, ship, and run.",
+        links:[LINK("Docker — overview","https://docs.docker.com/get-started/docker-overview/"),LINK("Containers vs VMs","https://www.docker.com/blog/containers-vs-virtual-machines/")] },
+      { tag:"Concept", title:"Images, containers, and layers",
+        desc:"An image is a read-only snapshot. A container is a running instance of an image. Images are built in layers — each Dockerfile instruction adds one.",
+        links:[LINK("Docker — getting started","https://docs.docker.com/get-started/"),LINK("Docker — storage drivers","https://docs.docker.com/engine/storage/drivers/")] },
+      { tag:"Core", title:"Writing a Dockerfile",
+        desc:"FROM sets the base image; RUN executes commands; COPY copies files; CMD sets the default command; EXPOSE documents ports. Order matters for layer caching.",
+        links:[LINK("Dockerfile reference","https://docs.docker.com/reference/dockerfile/"),LINK("Dockerfile best practices","https://docs.docker.com/build/building/best-practices/")] },
+      { tag:"Concept", title:"Multi-stage builds",
+        desc:"Use one stage to build (with all dev tooling) and a second minimal stage for the runtime image. Can reduce image size from 1GB to under 100MB.",
+        links:[LINK("Docker — multi-stage builds","https://docs.docker.com/build/building/multi-stage/"),LINK("Multi-stage examples","https://docs.docker.com/language/nodejs/build-images/")] },
+      { tag:"Core", title:"Docker Compose — multi-container apps",
+        desc:"Define your entire stack (app + database + cache + proxy) in a single docker-compose.yml and start it with one command.",
+        links:[LINK("Docker Compose docs","https://docs.docker.com/compose/"),LINK("Compose file reference","https://docs.docker.com/reference/compose-file/")] },
+      { tag:"Concept", title:"Volumes and bind mounts",
+        desc:"Containers are ephemeral — data dies with them. Volumes persist data across container restarts. Bind mounts link host directories into the container.",
+        links:[LINK("Docker — volumes","https://docs.docker.com/engine/storage/volumes/"),LINK("Manage data in Docker","https://docs.docker.com/engine/storage/")] },
+      { tag:"Concept", title:"Container networking",
+        desc:"Containers on the same Compose network can reach each other by service name. Published ports (-p 8080:80) expose container ports to the host.",
+        links:[LINK("Docker networking overview","https://docs.docker.com/engine/network/"),LINK("Compose networking","https://docs.docker.com/compose/how-tos/networking/")] },
+      { tag:"Tool", title:"Docker Hub and container registries",
+        desc:"Push built images to a registry (Docker Hub, GHCR, ECR) so CI/CD pipelines and servers can pull and run them. Tag images with version and git SHA.",
+        links:[LINK("Docker Hub docs","https://docs.docker.com/docker-hub/"),LINK("GitHub Container Registry","https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry")] },
+      { tag:"Concept", title:".dockerignore and image optimization",
+        desc:"Like .gitignore but for Docker builds. Exclude node_modules, .git, and build artifacts to keep build context small and layers efficient.",
+        links:[LINK("dockerignore reference","https://docs.docker.com/build/concepts/context/#dockerignore-files")] },
+      { tag:"Concept", title:"Kubernetes overview",
+        desc:"K8s orchestrates containers across clusters — handles scheduling, scaling, self-healing, and rolling deployments. A steep but essential learning curve.",
+        links:[LINK("Kubernetes basics tutorial","https://kubernetes.io/docs/tutorials/kubernetes-basics/"),LINK("K8s concepts","https://kubernetes.io/docs/concepts/")] },
+    ]
+  },
+  {
+    num: "09", color: "#b48eff",
+    title: "YAML & Configuration Files",
+    topics: [
+      { tag:"Core", title:"YAML syntax",
+        desc:"Indentation-based format for scalars, lists, and maps. Supports anchors (&) and aliases (*) for reuse. One YAML mistake can silently break your whole pipeline.",
+        links:[LINK("Learn YAML in Y minutes","https://learnxinyminutes.com/docs/yaml/"),LINK("YAML spec","https://yaml.org/spec/1.2.2/")] },
+      { tag:"Concept", title:"YAML vs. JSON vs. TOML",
+        desc:"YAML is human-friendly but error-prone. JSON is strict and universal (APIs). TOML is minimal and great for config files (Cargo.toml, pyproject.toml).",
+        links:[LINK("TOML spec","https://toml.io/en/"),LINK("JSON vs YAML comparison","https://json2yaml.com/")] },
+      { tag:"Core", title:"docker-compose.yml",
+        desc:"Declares services (app, db, redis), their images or build context, ports, volumes, env vars, and the network they share. The lingua franca of local dev stacks.",
+        links:[LINK("Compose file reference","https://docs.docker.com/reference/compose-file/"),LINK("Compose getting started","https://docs.docker.com/compose/gettingstarted/")] },
+      { tag:"Core", title:"GitHub Actions YAML",
+        desc:"Defines CI/CD workflows: triggers (on: push), jobs (build, test, deploy), steps, environment variables, and secrets. The most important YAML you'll write.",
+        links:[LINK("GH Actions — workflow syntax","https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions"),LINK("GH Actions quickstart","https://docs.github.com/en/actions/writing-workflows/quickstart")] },
+      { tag:"Infra", title:"Kubernetes manifests",
+        desc:"Deployment.yaml, Service.yaml, Ingress.yaml, ConfigMap.yaml — K8s is declarative config all the way down. Kubectl apply -f applies your desired state.",
+        links:[LINK("K8s — Deployments","https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"),LINK("K8s YAML examples","https://kubernetes.io/docs/reference/kubernetes-api/")] },
+      { tag:"Infra", title:"Helm charts — templated Kubernetes config",
+        desc:"Helm is the package manager for Kubernetes. Charts are templated YAML manifests you can parameterize and version. Essential for deploying third-party apps to K8s.",
+        links:[LINK("Helm quickstart","https://helm.sh/docs/intro/quickstart/"),LINK("Helm chart structure","https://helm.sh/docs/chart_template_guide/getting_started/")] },
+      { tag:"Concept", title:"Config validation tools",
+        desc:"yamllint catches syntax errors. JSON Schema validates structure. Use both in CI so config mistakes are caught before they reach production.",
+        links:[LINK("yamllint docs","https://yamllint.readthedocs.io/en/stable/"),LINK("JSON Schema intro","https://json-schema.org/learn/getting-started-step-by-step")] },
+    ]
+  },
+  {
+    num: "10", color: "#ff7b72",
+    title: "CI/CD Pipelines",
+    topics: [
+      { tag:"Concept", title:"Continuous integration",
+        desc:"Every push triggers an automated build and test run. The goal is to catch integration bugs early and make the main branch always releasable.",
+        links:[LINK("Atlassian — CI explained","https://www.atlassian.com/continuous-delivery/continuous-integration"),LINK("CI best practices","https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs")] },
+      { tag:"Concept", title:"Continuous delivery vs. continuous deployment",
+        desc:"CD (delivery) means every build is releasable but humans trigger deploys. CD (deployment) means every passing build auto-deploys. Know which your team uses.",
+        links:[LINK("Atlassian — CD explained","https://www.atlassian.com/continuous-delivery"),LINK("Martin Fowler — CD","https://martinfowler.com/bliki/ContinuousDelivery.html")] },
+      { tag:"Ops", title:"GitHub Actions — workflows and runners",
+        desc:"Define workflows in .github/workflows/*.yml. Actions from the Marketplace (checkout, setup-node, docker/build-push-action) cover most use cases.",
+        links:[LINK("GH Actions docs","https://docs.github.com/en/actions"),LINK("Actions Marketplace","https://github.com/marketplace?type=actions")] },
+      { tag:"Ops", title:"GitLab CI/CD — pipelines and stages",
+        desc:".gitlab-ci.yml defines stages (build, test, deploy) and jobs. GitLab CI is tightly integrated with GitLab repos and has built-in container registry.",
+        links:[LINK("GitLab CI/CD docs","https://docs.gitlab.com/ee/ci/"),LINK("GitLab CI tutorial","https://docs.gitlab.com/ee/ci/quick_start/")] },
+      { tag:"Ops", title:"CircleCI, Jenkins, and other CI tools",
+        desc:"CircleCI is cloud-native and fast. Jenkins is the self-hosted OG — extremely flexible but high maintenance. Others: Buildkite, Drone, Woodpecker CI.",
+        links:[LINK("CircleCI docs","https://circleci.com/docs/"),LINK("Jenkins — getting started","https://www.jenkins.io/doc/pipeline/tour/getting-started/")] },
+      { tag:"Ops", title:"Pipeline stages — lint, test, build, deploy",
+        desc:"A good pipeline: lint → unit tests → build → integration tests → push image → deploy to staging → smoke test → deploy to production. Each stage gates the next.",
+        links:[LINK("GH Actions — jobs","https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/running-jobs-in-a-workflow")] },
+      { tag:"Concept", title:"Secrets management in CI",
+        desc:"Store API keys and tokens in your CI platform's secret store (GitHub Secrets, GitLab CI Variables). Never echo secrets in logs or put them in env vars visible to PRs.",
+        links:[LINK("GH — using secrets","https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions"),LINK("HashiCorp Vault","https://developer.hashicorp.com/vault/docs/what-is-vault")] },
+      { tag:"Concept", title:"Deployment strategies",
+        desc:"Rolling deploys replace instances gradually. Blue-green keeps two identical environments and flips traffic. Canary releases to a % of users first.",
+        links:[LINK("AWS — deployment options","https://docs.aws.amazon.com/whitepapers/latest/overview-deployment-options/bluegreen-deployments.html"),LINK("Martin Fowler — blue-green","https://martinfowler.com/bliki/BlueGreenDeployment.html")] },
+      { tag:"Ops", title:"Automated testing in the pipeline",
+        desc:"Run unit tests on every push, integration tests on PRs, e2e tests on merge to main. Fail fast: a slow test suite kills the CI feedback loop.",
+        links:[LINK("GH Actions — test Node.js","https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs"),LINK("Playwright CI","https://playwright.dev/docs/ci")] },
+      { tag:"Ops", title:"Notifications, rollback, and failure recovery",
+        desc:"Slack/email notifications on failure. Every deployment should be reversible — keep the previous image tag and document rollback steps.",
+        links:[LINK("GH — managing environments","https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-deployments/managing-environments-for-deployment")] },
+    ]
+  },
+  {
+    num: "11", color: "#52d58a",
+    title: "Servers & Hosting",
+    topics: [
+      { tag:"Concept", title:"VMs vs. containers vs. serverless",
+        desc:"VMs are full OS instances. Containers are lightweight processes. Serverless runs your function in response to events, billed per invocation — no server management.",
+        links:[LINK("Docker — containers vs VMs","https://www.docker.com/blog/containers-vs-virtual-machines/"),LINK("Cloudflare — serverless explained","https://www.cloudflare.com/learning/serverless/what-is-serverless/")] },
+      { tag:"Infra", title:"Linux basics",
+        desc:"File permissions, processes (ps, kill), systemd services, SSH key auth, package management (apt/yum), cron jobs, and reading logs with journalctl/tail.",
+        links:[LINK("Linux Journey (interactive)","https://linuxjourney.com/"),LINK("The Linux Command Line (free book)","https://linuxcommand.org/tlcl.php")] },
+      { tag:"Infra", title:"Nginx — reverse proxy and static serving",
+        desc:"Nginx sits in front of your app: serves static files, terminates SSL, forwards requests to Node/Python/etc, and load-balances across multiple instances.",
+        links:[LINK("Nginx beginner's guide","https://nginx.org/en/docs/beginners_guide.html"),LINK("DigitalOcean — Nginx essentials","https://www.digitalocean.com/community/tutorials/nginx-essentials-installation-and-configuration-troubleshooting")] },
+      { tag:"Infra", title:"SSL/TLS — HTTPS and Let's Encrypt",
+        desc:"TLS encrypts traffic between client and server. Let's Encrypt provides free, auto-renewing certificates. Certbot automates the process on most servers.",
+        links:[LINK("Let's Encrypt — getting started","https://letsencrypt.org/getting-started/"),LINK("MDN — TLS","https://developer.mozilla.org/en-US/docs/Web/Security/Transport_Layer_Security")] },
+      { tag:"Infra", title:"DNS — domains, records, and propagation",
+        desc:"A records point a domain to an IP. CNAME records alias to another hostname. MX records route email. Changes propagate globally over minutes to 48 hours.",
+        links:[LINK("How DNS works (comic)","https://howdns.works/"),LINK("MDN — what is a domain name","https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_domain_name")] },
+      { tag:"Infra", title:"Cloud providers — AWS, GCP, Azure",
+        desc:"AWS has the broadest service catalog. GCP excels at data and ML. Azure dominates enterprises. For most web apps: compute (EC2/GCE), storage (S3/GCS), and managed databases.",
+        links:[LINK("AWS — getting started","https://aws.amazon.com/getting-started/"),LINK("GCP — getting started","https://cloud.google.com/docs/get-started"),LINK("Cloud provider comparison","https://cloudprice.net/")] },
+      { tag:"Infra", title:"PaaS platforms — Vercel, Render, Railway, Fly.io",
+        desc:"Deploy without managing servers. Vercel is optimized for Next.js. Render and Railway are flexible. Fly.io runs containers close to users globally.",
+        links:[LINK("Vercel docs","https://vercel.com/docs"),LINK("Render docs","https://render.com/docs"),LINK("Fly.io docs","https://fly.io/docs/getting-started/")] },
+      { tag:"Infra", title:"Serverless functions — Lambda, Cloudflare Workers",
+        desc:"AWS Lambda runs functions in response to events (HTTP, S3, queue). Cloudflare Workers run at the edge in 300+ locations globally with near-zero cold starts.",
+        links:[LINK("AWS Lambda getting started","https://aws.amazon.com/lambda/getting-started/"),LINK("Cloudflare Workers","https://developers.cloudflare.com/workers/")] },
+      { tag:"Concept", title:"CDNs — edge caching and content delivery",
+        desc:"A CDN caches your static assets (JS, CSS, images) at edge nodes worldwide. Users download from the nearest node — dramatically faster for global audiences.",
+        links:[LINK("web.dev — CDNs","https://web.dev/articles/content-delivery-networks"),LINK("MDN — CDN glossary","https://developer.mozilla.org/en-US/docs/Glossary/CDN")] },
+      { tag:"Infra", title:"Infrastructure as Code — Terraform and Pulumi",
+        desc:"Define your cloud infrastructure in code so it's versioned, reviewable, and reproducible. Terraform uses HCL; Pulumi uses TypeScript/Python/Go.",
+        links:[LINK("Terraform intro","https://developer.hashicorp.com/terraform/intro"),LINK("Pulumi getting started","https://www.pulumi.com/docs/iac/get-started/")] },
+      { tag:"Concept", title:"Cost management and scaling",
+        desc:"Horizontal scaling adds more instances; vertical scaling makes each instance bigger. Auto-scaling matches capacity to load. Monitor costs or they compound fast.",
+        links:[LINK("AWS — auto scaling","https://aws.amazon.com/autoscaling/"),LINK("Google Cloud cost optimization","https://cloud.google.com/architecture/framework/cost-optimization")] },
+    ]
+  },
+  {
+    num: "12", color: "#9a9db0",
+    title: "Observability & Production",
+    topics: [
+      { tag:"Ops", title:"Logging — structured logs and aggregation",
+        desc:"Use structured JSON logs with consistent fields (level, timestamp, requestId, userId). Aggregate with a log platform (Loki, Datadog, CloudWatch) to search and alert.",
+        links:[LINK("Better Stack — Node.js logging","https://betterstack.com/community/guides/logging/nodejs-logging/"),LINK("Pino (fast logger)","https://getpino.io/#/")] },
+      { tag:"Ops", title:"Metrics and monitoring — Prometheus and Grafana",
+        desc:"Metrics are time-series numbers (request rate, error rate, latency). Prometheus scrapes and stores them; Grafana visualizes them in dashboards.",
+        links:[LINK("Prometheus intro","https://prometheus.io/docs/introduction/overview/"),LINK("Grafana — first dashboard","https://grafana.com/docs/grafana/latest/getting-started/build-first-dashboard/")] },
+      { tag:"Ops", title:"Distributed tracing — OpenTelemetry",
+        desc:"Traces follow a request across multiple services. A span represents one operation in that trace. OpenTelemetry is the vendor-neutral standard.",
+        links:[LINK("OpenTelemetry — what is it?","https://opentelemetry.io/docs/what-is-opentelemetry/"),LINK("Jaeger tracing","https://www.jaegertracing.io/docs/getting-started/")] },
+      { tag:"Ops", title:"Error tracking — Sentry",
+        desc:"Sentry captures unhandled exceptions in real-time with full stack traces, user context, and grouping by root cause. Add it to every production app.",
+        links:[LINK("Sentry for JavaScript","https://docs.sentry.io/platforms/javascript/"),LINK("Sentry for Node.js","https://docs.sentry.io/platforms/javascript/guides/node/")] },
+      { tag:"Concept", title:"Health checks, readiness and liveness probes",
+        desc:"A /health endpoint returns 200 if the service is up. K8s uses readiness probes (is it ready to receive traffic?) and liveness probes (is it alive?) to manage pods.",
+        links:[LINK("K8s — probes","https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/"),LINK("Health check patterns","https://microservices.io/patterns/observability/health-check-api.html")] },
+      { tag:"Concept", title:"Performance profiling",
+        desc:"Chrome DevTools Performance panel profiles browser-side code. Node.js --prof flag generates V8 profiles. Use clinic.js for Node performance issues.",
+        links:[LINK("Chrome DevTools — performance","https://developer.chrome.com/docs/devtools/performance/"),LINK("Node.js — profiling","https://nodejs.org/en/learn/diagnostics/profiling")] },
+      { tag:"Concept", title:"Zero-downtime deploys and graceful shutdown",
+        desc:"Listen for SIGTERM and stop accepting new requests, finish in-flight ones, then exit. Combined with a load balancer rolling update, this means zero dropped requests.",
+        links:[LINK("Node.js — graceful shutdown","https://nodejs.org/en/learn/getting-started/nodejs-the-difference-between-development-and-production"),LINK("PM2 — graceful restart","https://pm2.keymetrics.io/docs/usage/signals-clean-restart/")] },
+      { tag:"Concept", title:"Postmortems and incident management",
+        desc:"A blameless postmortem documents what happened, why, the impact, and action items. The goal is systemic improvement, not assigning fault.",
+        links:[LINK("Google SRE — postmortem culture","https://sre.google/sre-book/postmortem-culture/"),LINK("PagerDuty — incident response","https://response.pagerduty.com/")] },
+    ]
+  },
+];
+
+// ── Build DOM ─────────────────────────────────────────────────────
+const extIcon = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V7M8 1h3m0 0v3m0-3L5 7"/></svg>`;
+
+const container = document.getElementById('phases');
+
+phases.forEach((phase, idx) => {
+  const el = document.createElement('div');
+  el.className = 'phase';
+  const weeks = phaseWeeks[idx];
+  const weekLabel = weeks === 1 ? '1 week' : `${weeks} weeks`;
+
+  const topicsHTML = phase.topics.map(t => {
+    const linksHTML = t.links.map(l =>
+      `<a class="link" href="${l.url}" target="_blank" rel="noopener">${extIcon}${l.label}</a>`
+    ).join('');
+    return `
+      <div class="topic">
+        <div><span class="tag tag-${t.tag}">${t.tag}</span></div>
+        <div class="topic-content">
+          <div class="topic-title">${t.title}</div>
+          <div class="topic-desc">${t.desc}</div>
+          <div class="topic-links">${linksHTML}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="phase-header" onclick="this.closest('.phase').classList.toggle('open')">
+      <span class="phase-num">${phase.num}</span>
+      <div class="phase-stripe" style="background:${phase.color}"></div>
+      <span class="phase-title">${phase.title}</span>
+      <span class="phase-meta">${phase.topics.length} topics</span>
+      <span class="phase-duration">${weekLabel}</span>
+      <svg class="phase-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 5l5 5-5 5"/>
+      </svg>
+    </div>
+    <div class="phase-body">${topicsHTML}</div>`;
+
+  container.appendChild(el);
+});
+
+// Open first phase by default
+document.querySelector('.phase').classList.add('open');
+
+// ── Schedule generator ──────────────────────────────────────────────
+const calIcon = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V7M8 1h3m0 0v3m0-3L5 7"/></svg>`;
+
+let currentCadence = 5;
+
+const cadenceHints = {
+  1: 'Once a week — very relaxed pace',
+  2: 'Twice a week — light pace',
+  3: '3 days a week — casual pace',
+  4: '4 days a week — steady pace',
+  5: 'Weekdays — the default estimate',
+  6: '6 days a week — intensive pace',
+  7: 'Every day — maximum pace'
+};
+
+function setCadence(n) {
+  currentCadence = n;
+  document.querySelectorAll('.cadence-pill').forEach((el, i) => {
+    el.classList.toggle('active', i + 1 === n);
+  });
+  document.getElementById('cadenceHint').textContent = cadenceHints[n];
+  renderSchedule();
+}
+
+function toGcalDate(d) {
+  return d.toISOString().slice(0,10).replace(/-/g,'');
+}
+
+function renderSchedule() {
+  const startVal = document.getElementById('schedStart').value;
+  const list = document.getElementById('schedList');
+  if (!startVal) { list.innerHTML = ''; return; }
+
+  const cursor = new Date(startVal + 'T00:00:00');
+  const fmt = d => d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+
+  // Base estimates assume 5 study days/week. Scale linearly with chosen cadence.
+  list.innerHTML = phases.map((phase, idx) => {
+    const baseWeeks = phaseWeeks[idx];
+    const adjustedWeeks = Math.ceil(baseWeeks * 5 / currentCadence);
+    const start = new Date(cursor.getTime());
+    const end = new Date(cursor.getTime());
+    end.setDate(end.getDate() + adjustedWeeks * 7);
+
+    const dates = toGcalDate(start) + '/' + toGcalDate(end);
+    const desc = phase.topics.map(t => '• ' + t.title).join('\n');
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: `Phase ${phase.num}: ${phase.title}`,
+      dates,
+      details: desc
+    });
+    const url = 'https://calendar.google.com/calendar/render?' + params.toString();
+
+    const dateRange = fmt(start) + ' → ' + fmt(new Date(end.getTime() - 86400000));
+    const weekLabel = adjustedWeeks === 1 ? '1 week' : adjustedWeeks + ' weeks';
+    const diffLabel = adjustedWeeks !== baseWeeks
+      ? ` (est. ${baseWeeks === 1 ? '1 wk' : baseWeeks + ' wks'} @ 5 days)`
+      : '';
+    cursor.setDate(cursor.getDate() + adjustedWeeks * 7);
+
+    return `
+      <div class="sched-item">
+        <div class="sched-stripe" style="background:${phase.color}"></div>
+        <div class="sched-info">
+          <div class="sched-name">${phase.num} · ${phase.title}</div>
+          <div class="sched-dates">${dateRange} &nbsp;·&nbsp; ${weekLabel}</div>
+          ${diffLabel ? `<div class="sched-dates-sub">${diffLabel}</div>` : ''}
+        </div>
+        <a class="sched-add" href="${url}" target="_blank" rel="noopener">${calIcon} Add</a>
+      </div>`;
+  }).join('');
+}
+
+function padICS(n) { return String(n).padStart(2,'0'); }
+
+function toICSDate(d) {
+  return d.getFullYear() + padICS(d.getMonth()+1) + padICS(d.getDate());
+}
+
+function exportAllICS() {
+  const startVal = document.getElementById('schedStart').value;
+  if (!startVal) { alert('Please pick a start date first.'); return; }
+
+  const cursor = new Date(startVal + 'T00:00:00');
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Web Dev Roadmap//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH'
+  ];
+
+  phases.forEach((phase, idx) => {
+    const baseWeeks = phaseWeeks[idx];
+    const adjustedWeeks = Math.ceil(baseWeeks * 5 / currentCadence);
+    const start = new Date(cursor.getTime());
+    const end = new Date(cursor.getTime());
+    end.setDate(end.getDate() + adjustedWeeks * 7);
+
+    const desc = phase.topics.map(t => '\u2022 ' + t.title).join('\\n');
+
+    lines.push('BEGIN:VEVENT');
+    lines.push('DTSTART;VALUE=DATE:' + toICSDate(start));
+    lines.push('DTEND;VALUE=DATE:' + toICSDate(end));
+    lines.push('SUMMARY:Phase ' + phase.num + ': ' + phase.title);
+    lines.push('DESCRIPTION:' + desc);
+    lines.push('STATUS:CONFIRMED');
+    lines.push('END:VEVENT');
+
+    cursor.setDate(cursor.getDate() + adjustedWeeks * 7);
+  });
+
+  lines.push('END:VCALENDAR');
+
+  const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'web-dev-roadmap.ics';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Default start date to today
+const todayStr = new Date().toISOString().slice(0,10);
+document.getElementById('schedStart').value = todayStr;
+renderSchedule();
+</script>
+</body>
+</html>
